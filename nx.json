@@ -1,0 +1,42 @@
+{
+  "npmScope": "test",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "accessToken": "ZTgxNzVkYWYtODg0OS00MTZiLTg5MzEtZTgxMzRmYjlhNmMwfHJlYWQtd3JpdGU=",
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true,
+        "cacheableOperations": [
+          "build",
+          "test",
+          "lint"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "test": {
+      "tags": []
+    },
+    "test-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "test"
+      ]
+    },
+    "test-lib": {
+      "tags": []
+    }
+  }
+}
