@@ -36,7 +36,7 @@ jobs:
           path: |
             '**/node_modules'
             !/node_modules/.cache/nx
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-modules2-${{ hashFiles('**/package-lock.json') }}
       - run: npm install
       - name: Start NX Agent ${{ matrix.agent }}
         run: npx nx-cloud start-agent
