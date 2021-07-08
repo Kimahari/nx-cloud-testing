@@ -39,6 +39,7 @@ jobs:
             '**/node_modules'
             !/node_modules/.cache/nx
           key: ${{ runner.os }}-modules2-${{ hashFiles('**/package-lock.json') }}
+      - run: rm -r node_modules/.cache/nx
       - run: npm install
       - name: Start NX Agent ${{ matrix.agent }}
         run: npx nx-cloud start-agent
@@ -60,8 +61,8 @@ jobs:
         with:
           path: |
             '**/node_modules'
-            !/node_modules/.cache/nx
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+      - run: rm -r node_modules/.cache/nx
       - run: npm install
       - name: Testing
         uses: JamesHenry/parallel-bash-commands@v0.1
