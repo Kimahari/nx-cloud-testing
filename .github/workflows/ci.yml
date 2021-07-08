@@ -18,6 +18,7 @@ env:
   NX_BRANCH: ${{ github.run_id }}
   NX_RUN_GROUP: ${{ github.run_id }}
   NX_CLOUD_DISTRIBUTED_EXECUTION: 'true'
+  CYPRESS_CACHE_FOLDER: '~/.cache/Cypress'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -37,6 +38,11 @@ jobs:
             '**/node_modules'
             !/node_modules/.cache
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Restore Cypress
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
       - run: npm install
       - name: Start NX Agent ${{ matrix.agent }}
         run: npx nx-cloud start-agent
@@ -60,6 +66,11 @@ jobs:
             '**/node_modules'
             !/node_modules/.cache
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Restore Cypress
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
       - run: npm install
       - run: npx nx affected --base=main --target=build --parallel --max-parallel=3
       - run: npx nx affected --base=main --target=test --parallel --max-parallel=2
