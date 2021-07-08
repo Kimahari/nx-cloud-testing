@@ -36,13 +36,8 @@ jobs:
         with:
           path: |
             '**/node_modules'
-            !/node_modules/.cache
+            !/node_modules/.cache/nx
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Restore Cypress
-        uses: actions/cache@v2
-        with:
-          path: ~/.cache/Cypress
-          key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
       - run: npm install
       - name: Start NX Agent ${{ matrix.agent }}
         run: npx nx-cloud start-agent
@@ -64,13 +59,8 @@ jobs:
         with:
           path: |
             '**/node_modules'
-            !/node_modules/.cache
+            !/node_modules/.cache/nx
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Restore Cypress
-        uses: actions/cache@v2
-        with:
-          path: ~/.cache/Cypress
-          key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
       - run: npm install
       - run: npx nx run-many --target=build --all --parallel --max-parallel=3
       - run: npx nx run-many --target=lint --all --parallel --max-parallel=3
