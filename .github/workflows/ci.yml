@@ -38,6 +38,6 @@ jobs:
         with:
           node-version: 14.x
       - run: npm install
-      - run: npx nx run-many --target=build --all --parallel --max-parallel=3
-      - run: npx nx run-many --target=test --all --parallel --max-parallel=3
-      - run: npx nx run-many --target=lint --all --parallel --max-parallel=3
+      - run: npx nx affected --base=origin/main --target=build --parallel --max-parallel=3
+      - run: npx nx affected --base=origin/main --target=test --parallel --max-parallel=2
+      - run: npx nx affected --base=origin/main --target=lint --parallel --max-parallel=4
