@@ -61,7 +61,7 @@ jobs:
             !/node_modules/.cache
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - run: npm install
-      - run: npx nx affected --base=origin/main --target=build --parallel --max-parallel=3
-      - run: npx nx affected --base=origin/main --target=test --parallel --max-parallel=2
-      - run: npx nx affected --base=origin/main --target=lint --parallel --max-parallel=4
+      - run: npx nx affected --base=main --target=build --parallel --max-parallel=3
+      - run: npx nx affected --base=main --target=test --parallel --max-parallel=2
+      - run: npx nx affected --base=main --target=lint --parallel --max-parallel=4
       - run: npx nx-cloud stop-all-agents
