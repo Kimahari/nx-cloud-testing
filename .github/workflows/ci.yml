@@ -11,13 +11,13 @@ on:
       - main
     paths-ignore:
       - '**.md'
-      
+
   workflow_dispatch:
-  
+
 env:
   NX_BRANCH: ${{ github.event.number }}
   NX_RUN_GROUP: ${{ github.run_id }}
-  
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -29,7 +29,6 @@ jobs:
         node-version: [ 14.x ]
         operating-system: [ubuntu-latest]
     steps:
-      - uses: hmarr/debug-action@v1.0.0
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
         with:
