@@ -72,8 +72,8 @@ jobs:
           path: ~/.cache/Cypress
           key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
       - run: npm install
-      - run: npx nx affected --base=main --target=build --parallel --max-parallel=3
-      - run: npx nx affected --base=main --target=test --parallel --max-parallel=2
-      - run: npx nx affected --base=main --target=lint --parallel --max-parallel=4
+      - run: npx nx run-many --target=build --all --parallel --max-parallel=3
+      - run: npx nx run-many --target=lint --all --parallel --max-parallel=3
+      - run: npx nx run-many --target=test --all --parallel --max-parallel=3
       - if: always()
         run: npx nx-cloud stop-all-agents
