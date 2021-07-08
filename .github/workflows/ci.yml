@@ -37,12 +37,11 @@ jobs:
         with:
           path: |
             '**/node_modules'
-            !/node_modules/.cache/nx
-          key: ${{ runner.os }}-modules2-${{ hashFiles('**/package-lock.json') }}
-      - run: rm -r ./node_modules/.cache/nx
+          key: ${{ runner.os }}-modules-${{ matrix.agent }}-${{ hashFiles('**/package-lock.json') }}
       - run: npm install
       - name: Start NX Agent ${{ matrix.agent }}
         run: npx nx-cloud start-agent
+      - run: rm -rf ./node_modules/.cache/nx
 
   build:
     # The type of runner that the job will run on
@@ -62,7 +61,6 @@ jobs:
           path: |
             '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
-      - run: rm -r ./node_modules/.cache/nx
       - run: npm install
       - name: Testing
         uses: JamesHenry/parallel-bash-commands@v0.1
@@ -70,5 +68,6 @@ jobs:
           cmd1: npx nx run-many --target=build --all
           cmd2: npx nx run-many --target=lint --all
           cmd3: npx nx run-many --target=test --all
+      - run: rm -rf ./node_modules/.cache/nx
       - if: always()
         run: npx nx-cloud stop-all-agents
