@@ -17,16 +17,9 @@ on:
 env:
   NX_BRANCH: ${{ github.run_id }}
   NX_RUN_GROUP: ${{ github.run_id }}
-  NX_CLOUD_DISTRIBUTED_EXECUTION: 'true'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  agent:
-    steps:
-        - uses: actions/checkout@v2
-        - run: npm install
-        - run: npx nx-cloud start-agent
-  # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -48,4 +41,3 @@ jobs:
       - run: npx nx affected --target=build --parallel --max-parallel=3
       - run: npx nx affected --target=test --parallel --max-parallel=2
       - run: npx nx affected --target=lint --parallel --max-parallel=4
-      - run: npx nx-cloud stop-all-agents
