@@ -18,7 +18,6 @@ env:
   NX_BRANCH: ${{ github.run_id }}
   NX_RUN_GROUP: ${{ github.run_id }}
   NX_CLOUD_DISTRIBUTED_EXECUTION: 'true'
-  CYPRESS_CACHE_FOLDER: '~/.cache/Cypress'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
